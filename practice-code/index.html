@@ -11,16 +11,16 @@
     <img src="" alt="Pokemon Sprite" id="pokemonSprite" style="display: none">
 
     <script>
-      // fetch('https://pokeapi.co/api/v2/pokemon/pikachu')
-      //   .then(response => {
+      fetch('https://pokeapi.co/api/v2/pokemon/pikachu')
+        .then(response => {
 
-      //     if (!response.ok){
-      //       throw new Error("could not fetch resource");
-      //     }
-      //     return response.json();
-      //   })
-      //   .then(data => console.log(data.id))
-      //   .catch(error => console.log(error));  
+          if (!response.ok){
+            throw new Error("could not fetch resource");
+          }
+          return response.json();
+        })
+        .then(data => console.log(data.id))
+        .catch(error => console.log(error));  
 
 
       async function fetchData() {
