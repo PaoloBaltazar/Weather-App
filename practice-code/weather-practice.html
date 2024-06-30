@@ -14,7 +14,7 @@
 
     <script>
 
-      const userInput = 'Chicago'
+      const userInput = 'Manila'
 
       let lat = ''
       let lon = ''
@@ -44,6 +44,11 @@
 
         .then(weatherData => {
           console.log(weatherData);
+          console.log(`min: ${weatherData.main.temp_max}`)
+          console.log(`max: ${weatherData.main.temp_min}`)
+          console.log(`humidity: ${weatherData.main.humidity}`)
+          console.log(`pressure: ${weatherData.main.pressure}`)
+          console.log(`wind speed: ${weatherData.wind.speed}`)
         })
         
         .catch(error => console.log(error));  
