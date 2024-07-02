@@ -5,35 +5,48 @@
       Weather App
     </title>
     <link rel="stylesheet" href="WeatherApp.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   </head>
 
   <body>
+
+    <div class="title">
+      <h1>Welcome To The Weather App</h1>
+    </div>
+
     <div class="weather-app">
-      <div class="header">
-        <div class="title">
-          <h1>Welcome To The Weather App</h1>
-        </div>
-    
+
+      <div class="weather-container">
         <div class="current-weather">
           <h1 class="temperature">24°C</h1>
           <h2 class="location">Manila, Philippines</h2>
         </div>
     
         <div class="weather-details">
-          <h3 class="condition">Broken Clouds</h3>
-          <h3 class="humidity">Humidity: 66%</h3>
-          <h3 class="wind-speed">Wind Speed: 3.6 km/h</h3>
+          <p class="condition">Broken Clouds</p>
+          <p class="humidity">Humidity: 66%</p>
+          <p class="wind-speed">Wind Speed: 3.6 km/h</p>
         </div>
+
       </div>
     
       <div class="search">
+
         <input class="search-input" placeholder="Enter your city..">
         <ul class="suggestions">
           <li class="suggestion-item">Chicago</li>
           <li class="suggestion-item">London</li>
           <li class="suggestion-item">New York</li>
         </ul>
+
       </div>
+    </div>
+
+    <div>
+      <p>Coded by <a>Paolo I. Baltazar</a></p>
     </div>
   </body>
 
