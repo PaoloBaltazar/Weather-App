@@ -1,60 +1,34 @@
 h1, h2, h3, p {
   margin: 0;
   font-family: "Raleway", sans-serif;
-  color: white;
-} 
+}
 
-html, body{
-  margin: 0;
+html, body {
   height: 100%;
-  width: 100%;
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f0f0f0;
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 200px;
-  
-  background-image: url('./rainy-background.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
 
 .weather-app {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 100%;
-  
+  justify-content: center;
+
 }
 
 .weather-container {
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-  margin-left: 100px;
+  height: 400px;
+  width: 300px;
+  background-color: rgba(24, 24, 24, 0.316);
+  padding: 20px;
 }
 
-.current-weather {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.weather-details {
-  display: flex;
-  gap: 20px;
-}
-
-.search {
-  margin-right: 100px;
-  background-color: white;
-  opacity: 0.2;
+.details-container {
+  height: 400px;
+  width: 600px;
+  background-color: rgba(137, 43, 226, 0.298);
+  padding: 20px;
 }
