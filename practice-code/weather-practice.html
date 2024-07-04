@@ -49,6 +49,10 @@
           console.log(`humidity: ${weatherData.main.humidity}`)
           console.log(`pressure: ${weatherData.main.pressure}`)
           console.log(`wind speed: ${weatherData.wind.speed}`)
+          console.log(`wind direction: ${weatherData.wind.deg}`)
+          console.log(`ground level: ${weatherData.main.grnd_level}`);
+          console.log(`sea level: ${weatherData.main.sea_level}`);
+
         })
         
         .catch(error => console.log(error));  
