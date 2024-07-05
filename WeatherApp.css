@@ -1,6 +1,6 @@
 h1, h2, h3, p {
   margin: 0;
-  font-family: "Raleway", sans-serif;
+  font-family: "Outfit", sans-serif;
   color: white;
 }
 
@@ -21,7 +21,41 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
 
+.weather-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.date-container {
+  margin-top: 8px;
+  /* border-bottom: 1px solid #ffffff; */
+  padding-bottom: 10px;
+  font-size: 16px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+
+}
+
+
+
+.current-weather {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.location {
+  font-weight: 500;
+}
+
+.temperature {
+  font-size: 70px;
 }
 
 .weather-container {
@@ -34,6 +68,10 @@ body {
 }
 
 .details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 20px;
   height: 400px;
   width: 600px;
   background-color: rgba(45, 45, 45, 0.535);
@@ -42,19 +80,12 @@ body {
   border-bottom-right-radius: 20px;
 }
 
-.weather-details {
-  margin-top: 20px;
+.search-container {
   display: flex;
-  flex-direction: column;
   gap: 20px;
+  align-items: center;
+  margin-bottom: 60px;
 }
-
-.details-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 
 .search-input {
   width: 200px;
@@ -63,9 +94,40 @@ body {
   color: white;
   outline: none;
   border-bottom: 1px solid #ffffff;
+  padding: 10px;
 }
 
 .search-input::placeholder {
+  font-size: 16px;
   text-align: center;
   color: rgba(255, 255, 255, 0.5);
 }
+
+.search-button {
+  text-decoration: none;
+  background: none;
+  outline: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  
+}
+
+.search-icon {
+  width: 20px;
+}
+
+.weather-details-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+  gap: 20px;
+}
+
+.weather-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+

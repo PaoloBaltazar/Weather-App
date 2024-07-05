@@ -8,14 +8,20 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
   </head>
 
   <body>
     <div class="weather-app">
+
       <div class="weather-container">
+        <div class="date-container">
+          <p class="date">Saturday, July 5</p>
+        </div>
+
         <div class="current-weather">
           <h1 class="temperature">24°C</h1>
+          <img src="cloud.png">
           <h2 class="location">Manila, Philippines</h2>
         </div>
       </div>
@@ -23,17 +29,37 @@
       <div class="details-container">
         <div class="search-container">
           <input class="search-input" placeholder="Enter your city..">
-          <button>Search</button>
+          <button class="search-button"><img src="search-icon.svg" class="search-icon"></button>
         </div>
         
-        <div class="weather-details">
-          <p class="condition">Condition: Broken Clouds</p>
-          <p class="humidity">Humidity: 66%</p>
-          <p class="wind-speed">Wind Speed: 3.6 km/h</p>
-          <p class="wind-direction">Wind Direction: W</p>
-          <p class="pressure">Pressure: 1010</p>
+        <div class="weather-details-container">
+          <div class="weather-details">
+            <p>Condition: </p>
+            <p>Broken Clouds</p>
+          </div>
+
+          <div class="weather-details">
+            <p>Humidity: </p>
+            <p>66%</p>
+          </div>
+
+          <div class="weather-details">
+            <p>Wind Speed: </p>
+            <p>3.6 km/h</p>
+          </div>
+
+          <div class="weather-details">
+            <p>Wind Direction:: </p>
+            <p>W</p>
+          </div>
+
+          <div class="weather-details">
+            <p>Pressure: </p>
+            <p>1010</p>
+          </div>
         </div>
       </div>
+
     </div>
 
 
