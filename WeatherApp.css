@@ -13,7 +13,9 @@ html, body {
 }
 
 body {
-  background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+  background-image: linear-gradient( 135deg, #5EFCE8 10%, #736EFE 100%);
+
+
 }
 
 
@@ -61,10 +63,17 @@ body {
 .weather-container {
   height: 400px;
   width: 300px;
-  background-color: rgba(24, 24, 24, 0.316);
+  background-color: rgba(2, 44, 230, 0.584);
   padding: 20px;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
+
+  background-image: url('./rainy-background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 .details-container {
@@ -78,13 +87,16 @@ body {
   padding: 20px;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
+
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 .search-container {
   display: flex;
   gap: 20px;
   align-items: center;
-  margin-bottom: 60px;
+  margin-top: 20px;
+  margin-bottom: 50px;
 }
 
 .search-input {
