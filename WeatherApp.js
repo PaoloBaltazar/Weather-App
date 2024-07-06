@@ -28,6 +28,14 @@ async function displayWeather(location) {
 
   }
 
+  const currentWeatherHTML = `
+    <h1 class="temperature">${(Math.round(weatherData.main.temp) - 275.15).toFixed(0)}°C</h1>
+    <img src="cloud.png">
+    <h2 class="location">${weatherData.name}</h2>
+  `
+
+  document.querySelector('.js-current-weather').innerHTML = currentWeatherHTML;
+
   const weatherDetailsHTML = `
     <div class="weather-details">
       <p>Condition: </p>
