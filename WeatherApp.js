@@ -18,13 +18,44 @@ async function displayWeather(location) {
 
     weatherData = await weatherResponse.json();
 
+
     console.log(weatherData);
 
   } 
   
-  catch {
+  catch(e) {
+    console.error(e)
 
   }
+
+  const weatherDetailsHTML = `
+    <div class="weather-details">
+      <p>Condition: </p>
+      <p>${weatherData.weather[0].description}</p>
+    </div>
+
+    <div class="weather-details">
+      <p>Humidity: </p>
+      <p>${weatherData.main.humidity}%</p>
+    </div>
+
+    <div class="weather-details">
+      <p>Wind Speed: </p>
+      <p>${weatherData.wind.speed} km/h</p>
+    </div>
+
+    <div class="weather-details">
+      <p>Wind Direction: </p>
+      <p>${weatherData.wind.deg} deg</p>
+    </div>
+
+    <div class="weather-details">
+      <p>Pressure: </p>
+      <p>${weatherData.main.pressure}</p>
+    </div>
+  `
+
+  document.querySelector('.js-weather-details-container').innerHTML = weatherDetailsHTML;
 
 }
 
@@ -32,8 +63,4 @@ document.querySelector('.js-search-button').addEventListener('click', () => {
   const search = document.querySelector('.js-search-weather').value;
 
   displayWeather(search);
-
-  
-
-  
 })
