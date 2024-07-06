@@ -64,3 +64,11 @@ document.querySelector('.js-search-button').addEventListener('click', () => {
 
   displayWeather(search);
 })
+
+document.body.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter'){
+    const search = document.querySelector('.js-search-weather').value;
+
+    displayWeather(search);
+  }
+})
