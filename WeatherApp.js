@@ -7,6 +7,12 @@ async function displayWeather(location) {
     }
 
     const data = await response.json();
+
+    if (data.length === 0) {
+      alert('City not found');
+
+    }
+
     const lat = data[0].lat;
     const lon = data[0].lon;
 
@@ -17,8 +23,6 @@ async function displayWeather(location) {
     }
 
     weatherData = await weatherResponse.json();
-
-
     console.log(weatherData);
   } 
   
@@ -47,23 +51,28 @@ async function displayWeather(location) {
     </div>
 
     <div class="weather-details">
+      <p>Pressure: </p>
+      <p>${weatherData.main.pressure} hPa</p>
+    </div>
+
+    <div class="weather-details">
       <p>Wind Speed: </p>
       <p>${weatherData.wind.speed} km/h</p>
     </div>
 
     <div class="weather-details">
       <p>Wind Direction: </p>
-      <p>${weatherData.wind.deg} deg</p>
-    </div>
-
-    <div class="weather-details">
-      <p>Pressure: </p>
-      <p>${weatherData.main.pressure}</p>
+      <p>${getCardinalDirection(weatherData.wind.deg)}</p>
     </div>
   `
 
   document.querySelector('.js-weather-details-container').innerHTML = weatherDetailsHTML;
 
+}
+
+function getCardinalDirection(angle) {
+  const directions = ['↑ N', '↗ NE', '→ E', '↘ SE', '↓ S', '↙ SW', '← W', '↖ NW'];
+  return directions[Math.round(angle / 45) % 8];
 }
 
 document.querySelector('.js-search-button').addEventListener('click', () => {
@@ -81,4 +90,7 @@ document.body.addEventListener('keydown', (event) => {
 })
 
 displayWeather('guagua');
+
+
+
 
