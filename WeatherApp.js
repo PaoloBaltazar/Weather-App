@@ -20,7 +20,6 @@ async function displayWeather(location) {
 
 
     console.log(weatherData);
-
   } 
   
   catch(e) {
@@ -30,7 +29,7 @@ async function displayWeather(location) {
 
   const currentWeatherHTML = `
     <h1 class="temperature">${(Math.round(weatherData.main.temp) - 275.15).toFixed(0)}°C</h1>
-    <img src="cloud.png">
+    <img src="https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png" alt="weather condition" id="weatherCondition" class="">
     <h2 class="location">${weatherData.name}</h2>
   `
 
@@ -80,3 +79,6 @@ document.body.addEventListener('keydown', (event) => {
     displayWeather(search);
   }
 })
+
+displayWeather('guagua');
+
