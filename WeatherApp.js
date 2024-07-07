@@ -1,4 +1,8 @@
+import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
+
 async function displayWeather(location) {
+  let weatherData;
+
   try {
     const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=2a673f32af562f1ccf725c50134cb8e1`)
 
@@ -31,13 +35,22 @@ async function displayWeather(location) {
 
   }
 
+  const today = dayjs();
+  const dateString = today.format('dddd, MMMM D');
+
   const currentWeatherHTML = `
-    <h1 class="temperature">${(Math.round(weatherData.main.temp) - 275.15).toFixed(0)}°C</h1>
-    <img src="https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png" alt="weather condition" id="weatherCondition" class="">
-    <h2 class="location">${weatherData.name}</h2>
+    <div class="date-container">
+      <p class="date">${dateString}</p>
+    </div>
+
+    <div class="current-weather">
+      <h1 class="temperature">${(Math.round(weatherData.main.temp) - 275.15).toFixed(0)}°C</h1>
+      <img src="https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png" alt="weather condition" id="weatherCondition" class="">
+      <h2 class="location">${weatherData.name}</h2>
+    </div>
   `
 
-  document.querySelector('.js-current-weather').innerHTML = currentWeatherHTML;
+  document.querySelector('.js-weather-container').innerHTML = currentWeatherHTML;
 
   const weatherDetailsHTML = `
     <div class="weather-details">
