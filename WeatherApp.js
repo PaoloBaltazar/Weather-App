@@ -1,7 +1,6 @@
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
 async function displayWeather(location) {
-  let weatherData;
 
   try {
     const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=2a673f32af562f1ccf725c50134cb8e1`)
@@ -11,15 +10,29 @@ async function displayWeather(location) {
     }
 
     const data = await response.json();
+    console.log(data);
 
     if (data.length === 0) {
       alert('City not found');
-
     }
 
-    const lat = data[0].lat;
-    const lon = data[0].lon;
+    if (data.length >= 1) {
+      displayCityChoices(data);
+    }
 
+    const { lat, lon } = data[0];
+    fetchWeather(lat, lon);
+  }
+  
+  catch(e) {
+    console.error(e)
+
+  }
+}
+
+async function fetchWeather(lat, lon) {
+  let weatherData;
+  try {
     const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=2a673f32af562f1ccf725c50134cb8e1`)
 
     if (!weatherResponse.ok) {
@@ -27,14 +40,30 @@ async function displayWeather(location) {
     }
 
     weatherData = await weatherResponse.json();
+    renderWeather(weatherData);
     console.log(weatherData);
-  } 
-  
-  catch(e) {
-    console.error(e)
-
   }
 
+  catch (e) {
+    console.error(e);
+  }
+}
+
+function displayCityChoices(cities) {
+  const choicesContainer = document.querySelector('.js-city-choices');
+
+  cities.forEach((city) => {
+    const choiceButton = document.createElement('button');
+    choiceButton.textContent = `${city.name}, ${city.country}`;
+    choiceButton.classList.add('city-choice-button');
+    choiceButton.addEventListener('click', () => {
+      fetchWeather(city.lat, city.lon);
+    })
+    choicesContainer.appendChild(choiceButton);
+  })
+}
+
+function renderWeather(weatherData) {
   const today = dayjs();
   const dateString = today.format('dddd, MMMM D');
 
@@ -46,7 +75,7 @@ async function displayWeather(location) {
     <div class="current-weather">
       <h1 class="temperature">${(Math.round(weatherData.main.temp) - 275.15).toFixed(0)}°C</h1>
       <img src="https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png" alt="weather condition" id="weatherCondition" class="">
-      <h2 class="location">${weatherData.name}</h2>
+      <h2 class="location">${weatherData.name}, ${weatherData.sys.country}</h2>
     </div>
   `
 
@@ -54,33 +83,32 @@ async function displayWeather(location) {
 
   const weatherDetailsHTML = `
     <div class="weather-details">
-      <p>Condition: </p>
+      <h3>CONDITION </h3>
       <p>${weatherData.weather[0].description}</p>
     </div>
 
     <div class="weather-details">
-      <p>Humidity: </p>
+      <h3>HUMIDITY </h3>
       <p>${weatherData.main.humidity}%</p>
     </div>
 
     <div class="weather-details">
-      <p>Pressure: </p>
+      <h3>PRESSURE </h3>
       <p>${weatherData.main.pressure} hPa</p>
     </div>
 
     <div class="weather-details">
-      <p>Wind Speed: </p>
+      <h3>WIND SPEED </h3>
       <p>${weatherData.wind.speed} km/h</p>
     </div>
 
     <div class="weather-details">
-      <p>Wind Direction: </p>
+      <h3>WIND DIRECTION </h3>
       <p>${getCardinalDirection(weatherData.wind.deg)}</p>
     </div>
   `
 
   document.querySelector('.js-weather-details-container').innerHTML = weatherDetailsHTML;
-
 }
 
 function getCardinalDirection(angle) {
@@ -97,7 +125,6 @@ document.querySelector('.js-search-button').addEventListener('click', () => {
 document.body.addEventListener('keydown', (event) => {
   if (event.key === 'Enter'){
     const search = document.querySelector('.js-search-weather').value;
-
     displayWeather(search);
   }
 })
