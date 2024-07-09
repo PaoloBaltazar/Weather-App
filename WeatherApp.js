@@ -1,6 +1,6 @@
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
-async function displayWeather(location) {
+async function fetchLocation(location, isPreset = false) {
 
   try {
     const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=2a673f32af562f1ccf725c50134cb8e1`)
@@ -17,11 +17,11 @@ async function displayWeather(location) {
     }
 
     if (data.length >= 1) {
-      displayCityChoices(data);
+      displayCityChoices(data, isPreset);
     }
 
     const { lat, lon } = data[0];
-    fetchWeather(lat, lon);
+    fetchWeather(lat, lon, data[0].name, data[0].state);
   }
   
   catch(e) {
@@ -31,7 +31,32 @@ async function displayWeather(location) {
   
 }
 
-async function fetchWeather(lat, lon) {
+function displayCityChoices(cities, isPreset = false) {
+  const choicesContainer = document.querySelector('.js-city-choices');
+  choicesContainer.innerHTML = '';
+
+  cities.forEach((city, index) => {
+    const choiceButton = document.createElement('button');
+    choiceButton.innerHTML = `${city.name} (${city.state || 'N/A'})`;
+    choiceButton.classList.add('city-choice-button');
+
+    if(isPreset && index === 0) {
+      choiceButton.classList.add('active');
+      fetchWeather(city.lat, city.lon, city.name, city.state);
+    }
+    
+    choiceButton.addEventListener('click', () => {
+      document.querySelectorAll('.city-choice-button').forEach(button => button.classList.remove('active'));
+      choiceButton.classList.add('active');
+      fetchWeather(city.lat, city.lon, city.name, city.state);
+    })
+    choicesContainer.appendChild(choiceButton);
+  })
+
+}
+
+
+async function fetchWeather(lat, lon, name, state) {
   let weatherData;
   try {
     const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=2a673f32af562f1ccf725c50134cb8e1`)
@@ -41,7 +66,7 @@ async function fetchWeather(lat, lon) {
     }
 
     weatherData = await weatherResponse.json();
-    renderWeather(weatherData);
+    renderWeather(weatherData, name, state);
     console.log(weatherData);
   }
 
@@ -50,23 +75,7 @@ async function fetchWeather(lat, lon) {
   }
 }
 
-function displayCityChoices(cities) {
-  const choicesContainer = document.querySelector('.js-city-choices');
-  choicesContainer.innerHTML = '';
-
-  cities.forEach((city) => {
-    const choiceButton = document.createElement('button');
-    choiceButton.textContent = `${city.name}, ${city.country}`;
-    choiceButton.classList.add('city-choice-button');
-    choiceButton.addEventListener('click', () => {
-      fetchWeather(city.lat, city.lon);
-    })
-    choicesContainer.appendChild(choiceButton);
-  })
-
-}
-
-function renderWeather(weatherData) {
+function renderWeather(weatherData, name, state) {
   const today = dayjs();
   const dateString = today.format('dddd, MMMM D');
 
@@ -78,7 +87,8 @@ function renderWeather(weatherData) {
     <div class="current-weather">
       <h1 class="temperature">${(Math.round(weatherData.main.temp) - 275.15).toFixed(0)}°C</h1>
       <img src="https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png" alt="weather condition" id="weatherCondition" class="">
-      <h2 class="location">${weatherData.name}, ${weatherData.sys.country}</h2>
+      <h2 class="city-name">${name}</h2>
+      
     </div>
   `
 
@@ -122,7 +132,7 @@ function getCardinalDirection(angle) {
 document.querySelector('.js-search-button').addEventListener('click', () => {
   const search = document.querySelector('.js-search-weather').value;
   
-  displayWeather(search);
+  fetchLocation(search, true);
   
 })
 
@@ -130,13 +140,13 @@ document.body.addEventListener('keydown', (event) => {
   if (event.key === 'Enter'){
     const search = document.querySelector('.js-search-weather').value;
     
-    displayWeather(search);
+    fetchLocation(search, true);
     
     
   }
 })
 
-displayWeather('guagua');
+fetchLocation('guagua', true);
 
 
 
