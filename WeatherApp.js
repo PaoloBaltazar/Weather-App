@@ -28,6 +28,7 @@ async function displayWeather(location) {
     console.error(e)
 
   }
+  
 }
 
 async function fetchWeather(lat, lon) {
@@ -51,6 +52,7 @@ async function fetchWeather(lat, lon) {
 
 function displayCityChoices(cities) {
   const choicesContainer = document.querySelector('.js-city-choices');
+  choicesContainer.innerHTML = '';
 
   cities.forEach((city) => {
     const choiceButton = document.createElement('button');
@@ -61,6 +63,7 @@ function displayCityChoices(cities) {
     })
     choicesContainer.appendChild(choiceButton);
   })
+
 }
 
 function renderWeather(weatherData) {
@@ -118,14 +121,18 @@ function getCardinalDirection(angle) {
 
 document.querySelector('.js-search-button').addEventListener('click', () => {
   const search = document.querySelector('.js-search-weather').value;
-
+  
   displayWeather(search);
+  
 })
 
 document.body.addEventListener('keydown', (event) => {
   if (event.key === 'Enter'){
     const search = document.querySelector('.js-search-weather').value;
+    
     displayWeather(search);
+    
+    
   }
 })
 
