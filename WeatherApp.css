@@ -36,10 +36,9 @@ body {
   margin-top: 8px;
   /* border-bottom: 1px solid #ffffff; */
   padding-bottom: 10px;
-  font-size: 16px;
+  font-size: 20px;
   text-align: center;
   color: rgba(255, 255, 255, 0.5);
-
 }
 
 .current-weather {
@@ -138,6 +137,20 @@ body {
   padding: 10px;
   border-radius: 20px;
   cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.city-choice-button:hover{
+  opacity: 0.8;
+  
+}
+
+.city-choice-button:active{
+  opacity: 0.4
+}
+
+.active {
+  background-color: #2e2b5c;
 }
 
 .weather-details-container {
@@ -153,8 +166,6 @@ body {
   justify-content: space-between;
 }
 
-.active {
-  background-color: #2e2b5c;
-}
+
 
 

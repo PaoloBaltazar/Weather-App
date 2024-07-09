@@ -42,13 +42,13 @@ function displayCityChoices(cities, isPreset = false) {
 
     if(isPreset && index === 0) {
       choiceButton.classList.add('active');
-      fetchWeather(city.lat, city.lon, city.name, city.state);
+      fetchWeather(city.lat, city.lon, city.name);
     }
     
     choiceButton.addEventListener('click', () => {
       document.querySelectorAll('.city-choice-button').forEach(button => button.classList.remove('active'));
       choiceButton.classList.add('active');
-      fetchWeather(city.lat, city.lon, city.name, city.state);
+      fetchWeather(city.lat, city.lon, city.name);
     })
     choicesContainer.appendChild(choiceButton);
   })
@@ -56,7 +56,7 @@ function displayCityChoices(cities, isPreset = false) {
 }
 
 
-async function fetchWeather(lat, lon, name, state) {
+async function fetchWeather(lat, lon, name) {
   let weatherData;
   try {
     const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=2a673f32af562f1ccf725c50134cb8e1`)
@@ -66,7 +66,7 @@ async function fetchWeather(lat, lon, name, state) {
     }
 
     weatherData = await weatherResponse.json();
-    renderWeather(weatherData, name, state);
+    renderWeather(weatherData, name);
     console.log(weatherData);
   }
 
@@ -75,7 +75,7 @@ async function fetchWeather(lat, lon, name, state) {
   }
 }
 
-function renderWeather(weatherData, name, state) {
+function renderWeather(weatherData, name) {
   const today = dayjs();
   const dateString = today.format('dddd, MMMM D');
 
@@ -87,7 +87,7 @@ function renderWeather(weatherData, name, state) {
     <div class="current-weather">
       <h1 class="temperature">${(Math.round(weatherData.main.temp) - 275.15).toFixed(0)}°C</h1>
       <img src="https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png" alt="weather condition" id="weatherCondition" class="">
-      <h2 class="city-name">${name}</h2>
+      <h2 class="city-name">${name}, ${weatherData.sys.country}</h2>
       
     </div>
   `
@@ -131,7 +131,6 @@ function getCardinalDirection(angle) {
 
 document.querySelector('.js-search-button').addEventListener('click', () => {
   const search = document.querySelector('.js-search-weather').value;
-  
   fetchLocation(search, true);
   
 })
