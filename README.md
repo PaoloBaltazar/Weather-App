@@ -1,7 +1,7 @@
 ## Todo List Project
 This Weather App fetches and displays weather information for a specified location. The app uses the OpenWeatherMap API to retrieve geographical and weather data and displays it in a user-friendly format.
 
-## Screenshot
+## Overview
 
 ![Minimalist Website Launch Computer Mockup Instagram Post](https://github.com/PaoloBaltazar/Weather-App/assets/113003835/17504358-2afb-4040-a37a-8555efa796a0)
 
