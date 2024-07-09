@@ -3,7 +3,7 @@ import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 async function fetchLocation(location, isPreset = false) {
 
   try {
-    const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=2a673f32af562f1ccf725c50134cb8e1`)
+    const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=2a673f32af562f1ccf725c50134cb8e1`)
 
     if(!response.ok) {
       throw new Error("Could not fetch resource");
